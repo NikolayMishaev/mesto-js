@@ -1,4 +1,4 @@
-# сервис Mesto
+# Сервис Mesto
 ***
 https://nikolaymishaev.github.io/mesto/index.html
 ## Описание
