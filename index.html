@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Места</title>
+  </head>
+  <body class="body">
+    <div class="page">
+      <header class="header">
+        <div class="header__logo"></div>
+        <div class="header__line"></div>
+      </header>
+      <section class="profile">
+        <div class="profile__avatar"></div>
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <div class="profile__edit-button"></div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <div class="profile__add-button"></div>
+      </section>
+      <div class="cards">
+        <div class="card">
+          <img src="images/photo-dombay.jpg" alt="Домбай" class="card__place">
+          <p class="card__title">Домбай</p>
+          <div class="card__like"></div>
+        </div>
+        <div class="card">
+          <img src="images/photo-mountain-elbrus.jpg" alt="Гора Эльбрус" class="card__place">
+          <p class="card__title">Гора Эльбрус</p>
+          <div class="card__like"></div>
+        </div>
+        <div class="card">
+          <img src="images/photo_karachayevsk.jpg" alt="Карачаевск" class="card__place">
+          <p class="card__title">Карачаевск</p>
+          <div class="card__like"></div>
+        </div>
+        <div class="card">
+          <img src="images/photo-arkhyz.jpg" alt="Архыз" class="card__place">
+          <p class="card__title">Архыз</p>
+          <div class="card__like"></div>
+        </div>
+        <div class="card">
+          <img src="images/photo-chelyabinsk-oblast.jpg" alt="Челябинская область" class="card__place">
+          <p class="card__title">Челябинская область</p>
+          <div class="card__like"></div>
+        </div>
+        <div class="card">
+          <img src="images/photo-ivanovo.jpg" alt="Иваново" class="card__place">
+          <p class="card__title">Иваново</p>
+          <div class="card__like"></div>
+        </div>
+      </div>
+      <footer class="footer">
+        <p class="footer__copiryght">&copy; 2020 Mesto Russia</p>
+      </footer>
+      <div class="popup">
+        <div class="popup__container">
+          <div class="popup__close"></div>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form action="#" class="popup__form">
+            <input class="popup__input-name" type="text">
+            <input class="popup__input-job" type="text">
+            <input class="popup__input-submit" type="submit" value="Сохранить">
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+
+    let buttonEditProfile = document.querySelector('.profile__edit-button');
+    let popup = document.querySelector('.popup');
+    let buttonClosePopup = document.querySelector('.popup__close');
+    let formPopup = document.querySelector('.popup__form');
+    let profileTitleName = document.querySelector('.profile__title');
+    let profileSubtitleName = document.querySelector('.profile__subtitle');
+    let formNameInput = document.querySelector('.popup__input-name');
+    let formJobInput = document.querySelector('.popup__input-job');
+    let cardLikeActive = document.querySelectorAll('.card__like');
+
+    cardLikeActive.forEach(function(elem) {
+      elem.addEventListener('click', function () {
+        this.classList.toggle('card__like_active');
+      });
+    });
+
+    buttonEditProfile.addEventListener('click', function () {
+      popup.classList.toggle("popup_opened");
+      formNameInput.value = profileTitleName.textContent;
+      formJobInput.value = profileSubtitleName.textContent;
+    });
+
+    buttonClosePopup.addEventListener('click', function () {
+      popup.classList.toggle("popup_opened");
+    });
+
+    function formSubmitHandler (evt) {
+      evt.preventDefault();
+      profileTitleName.textContent = formNameInput.value;
+      profileSubtitleName.textContent = formJobInput.value;
+      popup.classList.toggle("popup_opened");
+    }
+
+    formPopup.addEventListener('submit', formSubmitHandler);
+
+    </script>
+  </body>
+</html>

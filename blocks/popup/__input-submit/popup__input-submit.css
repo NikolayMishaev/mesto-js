@@ -1,0 +1,31 @@
+.popup__input-submit {
+  display: block;
+  width: 100%;
+  background: #000000;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  height: 50px;
+  border: none;
+  transition: transform .5s, opacity .5s;
+  margin-bottom: 37px;
+}
+
+.popup__input-submit:hover {
+  transform: scale(1.040);
+  opacity: .8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 570px) {
+  .popup__input-submit {
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 25px;
+  }
+}
