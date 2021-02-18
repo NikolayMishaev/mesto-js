@@ -1,4 +1,9 @@
 .card__like {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
   display: inline-block;
   background: url(../../../images/card-heart.svg) no-repeat;
   width: 20px;
@@ -6,6 +11,11 @@
   background-size: contain;
   transition: opacity, .5s;
 }
+
+.card__like:focus {
+  outline: none;
+}
+
 
 .card__like:hover {
   opacity: .5;

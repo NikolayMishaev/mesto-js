@@ -1,4 +1,9 @@
 .profile__add-button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
   min-width: 150px;
   min-height: 50px;
   border: 2px solid #FFFFFF;
@@ -10,6 +15,10 @@
   box-sizing: border-box;
 }
 
+.profile__add-button:focus {
+  outline: none;
+}
+
 .profile__add-button:hover {
   transform: scale(1.025);
   opacity: .6;
@@ -17,6 +26,14 @@
 }
 
 @media screen and (max-width: 740px) {
+  .profile__add-button {
+    width: 60%;
+    min-width: 300px;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 440px) {
   .profile__add-button {
     width: 100%;
   }

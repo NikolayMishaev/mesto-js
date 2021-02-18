@@ -1,4 +1,9 @@
 .popup__close {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
   position: absolute;
   width: 40px;
   height: 40px;
@@ -9,6 +14,10 @@
   right: -40px;
   top: -40px;
   transition: opacity .5s, transform .5s;
+}
+
+.popup__close:focus {
+  outline: none;
 }
 
 .popup__close:hover {
