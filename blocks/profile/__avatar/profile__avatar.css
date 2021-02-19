@@ -1,6 +1,5 @@
 .profile__avatar {
-  background: url(../../../images/profile-avatar.png) no-repeat;
-  background-size: contain;
+  background: url(../../../images/profile-avatar.png) center/contain no-repeat;
   min-width: 120px;
   min-height: 120px;
   margin-right: 30px;

@@ -3,14 +3,10 @@
   border: none;
   font: inherit;
   color: inherit;
-  background-color: transparent;
   position: absolute;
   width: 40px;
   height: 40px;
-  background-image: url(../../../images/popup-close.svg);
-  background-repeat: no-repeat;
-  background-size: 140%;
-  background-position: center center;
+  background: url(../../../images/popup-close.svg) transparent no-repeat center center/140%;
   right: -40px;
   top: -40px;
   transition: opacity .5s, transform .5s;

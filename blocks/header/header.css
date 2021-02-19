@@ -5,6 +5,22 @@
   max-width: 940px;
 }
 
+.header::after {
+  content: '';
+  margin-top: 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: block;
+  width: 100%;
+}
+
+  @media screen and (max-width: 740px) {
+    .header::after  {
+      margin-top: 31px;
+    }
+  }
+
+}
+
 @media screen and (max-width: 740px) {
   .header  {
     padding: 28px 19px 0;

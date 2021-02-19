@@ -2,13 +2,11 @@
   padding: 0;
   font: inherit;
   color: inherit;
-  background-color: transparent;
   min-width: 150px;
   min-height: 50px;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
-  background: url(../../../images/profile-add-button.png) no-repeat;
-  background-position: center center;
+  background: url(../../../images/profile-add-button.png) no-repeat transparent center center;
   transition: transform .5s, opacity .5s;
   margin-left: auto;
   box-sizing: border-box;
