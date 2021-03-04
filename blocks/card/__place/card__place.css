@@ -2,5 +2,9 @@
   border-radius: 10px 10px 0 0;
   width: 100%;
   min-height: 283px;
-  object-fit: cover;
+  background: no-repeat center top/cover;
+}
+
+.card__place:hover {
+  cursor: pointer;
 }

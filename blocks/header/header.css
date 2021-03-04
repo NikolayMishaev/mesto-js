@@ -3,6 +3,7 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 940px;
+  flex-shrink: 0;
 }
 
 .header::after {
