@@ -1,6 +1,4 @@
 .popup__fullscreen {
-  visibility: hidden;
-  transition: visibility 1s;
   position: relative;
   position: fixed;
   left: 50%;

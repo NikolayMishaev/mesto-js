@@ -31,47 +31,51 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
-      <div class="popup__container popup__container_popup_edit-profile">
-        <button type="button" aria-label="close popup" class="popup__close"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <form action="#" name="mainForm" class="popup__form popup__form_form_edit-profile" method="POST">
-          <input name="name" placeholder="Имя" class="popup__input-first popup__input-first_input_edit-name"
-            type="text">
-          <input name="job" placeholder="О себе" class="popup__input-second popup__input-second_input_edit-job"
-            type="text">
-          <button aria-label="submit form" class="popup__input-submit" type="submit">Сохранить</button>
-        </form>
+    <div class="popups">
+      <div class="popup popup_type_edit-profile">
+        <div class="popup__container">
+          <button type="button" aria-label="close popup" class="popup__close"></button>
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <form action="#" name="edit-profile" class="popup__form popup__form_type_edit-profile" method="POST">
+            <input required name="name" placeholder="Имя" class="popup__input popup__input_type_edit-name" type="text">
+            <input required name="job" placeholder="О себе" class="popup__input popup__input_type_edit-job" type="text">
+            <button aria-label="submit form" class="popup__button-submit" type="submit">Сохранить</button>
+          </form>
+        </div>
       </div>
-      <div class="popup__container popup__container_popup_add-card">
-        <button type="button" aria-label="close popup" class="popup__close"></button>
-        <h3 class="popup__title">Новое место</h3>
-        <form action="#" name="mainForm" class="popup__form popup__form_form_add-card" method="POST">
-          <input name="name" placeholder="Название" class="popup__input-first popup__input-first_input_card-name"
-            type="text">
-          <input name="link" placeholder="Ссылка на картинку"
-            class="popup__input-second popup__input-second_input_card-link" type="text">
-          <button aria-label="submit form" class="popup__input-submit" type="submit">Создать</button>
-        </form>
+      <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <button type="button" aria-label="close popup" class="popup__close"></button>
+          <h3 class="popup__title">Новое место</h3>
+          <form action="#" name="add-card" class="popup__form popup__form_type_add-card" method="POST">
+            <input required name="name" placeholder="Название" class="popup__input popup__input_type_card-name"
+              type="text">
+            <input required name="link" placeholder="Ссылка на картинку"
+              class="popup__input popup__input_type_card-link" type="text">
+            <button aria-label="submit form" class="popup__button-submit" type="submit">Создать</button>
+          </form>
+        </div>
       </div>
-      <div class="popup__fullscreen">
-        <button type="button" aria-label="close popup" class="popup__close"></button>
-        <figure class="popup__fullscreen-figure">
-          <img src='#' alt="#" class="popup__fullscreen-image">
-          <figcaption class="popup__caption"></figcaption>
-        </figure>
+      <div class="popup popup_type_fullscreen">
+        <div class="popup__fullscreen">
+          <button type="button" aria-label="close popup" class="popup__close"></button>
+          <figure class="popup__fullscreen-figure">
+            <img src='#' alt="#" class="popup__fullscreen-image">
+            <figcaption class="popup__caption"></figcaption>
+          </figure>
+        </div>
       </div>
     </div>
-  </div>
-  <template id="card-template">
-    <li class="card">
-      <div class="card__place"></div>
-      <h2 class="card__title"></h2>
-      <button type="button" aria-label="like toggle" class="card__like"></button>
-      <div class="card__delete"></div>
-    </li>
-  </template>
-  <script src="./scripts/index.js"></script>
+    <template id="card-template">
+      <li class="card">
+        <div class="card__place"></div>
+        <h2 class="card__title"></h2>
+        <button type="button" aria-label="like toggle" class="card__like"></button>
+        <div class="card__delete"></div>
+      </li>
+    </template>
+    <script src="./scripts/constants.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
