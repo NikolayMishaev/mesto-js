@@ -54,11 +54,12 @@ const showCardImageFullscreen = (data) => {
 const getCardElement = (data) => {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardElementCardPlace = cardElement.querySelector('.card__place');
   cardElement.querySelector('.card__title').textContent = data.name;
-  cardElement.querySelector('.card__place').style.backgroundImage = `url(${data.link})`;
+  cardElementCardPlace.style.backgroundImage = `url(${data.link})`;
   cardElement.querySelector('.card__delete').addEventListener('click', handleDeleteCard);
   cardElement.querySelector('.card__like').addEventListener('click', handleLikeIcon);
-  cardElement.querySelector('.card__place').addEventListener('click', () => {
+  cardElementCardPlace.addEventListener('click', () => {
     showCardImageFullscreen(data);
   });
   return cardElement;
