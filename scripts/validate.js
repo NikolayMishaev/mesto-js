@@ -16,25 +16,25 @@ const checkAllInputsValidity = (setupValidation, formElement, inputList) => {
   setSubmitButtonState(setupValidation.submitButtonSelector, setupValidation.inactiveButtonClass, formElement, isFormValid);
 }
 
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(errorClass);
 };
 
-const hideError = (formElement, inputElement) => {
+const hideError = (formElement, inputElement, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (setupValidation, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showError(formElement, inputElement, inputElement.validationMessage);
+    showError(formElement, inputElement, inputElement.validationMessage, setupValidation.inputErrorClass, setupValidation.errorClass);
   } else {
-    hideError(formElement, inputElement);
+    hideError(formElement, inputElement, setupValidation.inputErrorClass, setupValidation.errorClass);
   }
 };
 
@@ -42,7 +42,7 @@ const setEventListeners = (setupValidation, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(setupValidation.inputSelector));
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(setupValidation, formElement, inputElement);
       checkAllInputsValidity(setupValidation, formElement, inputList);
     });
 

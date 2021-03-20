@@ -10,12 +10,13 @@ const inputFieldsPopupEditProfile = formPopupEditProfile.querySelectorAll('.popu
 const formEditProfileNameInput = formPopupEditProfile.elements.name;
 const formEditProfileJobInput = formPopupEditProfile.elements.job;
 const editButton = formPopupEditProfile.querySelector('.popup__button-submit');
+const formEditProfileInputError = formPopupEditProfile.querySelector('.popup__input-error');
 const formPopupAddCard = document.forms['add-card'];
 const inputFieldsPopupAddCard = formPopupAddCard.querySelectorAll('.popup__input');
 const formAddCardNameInput = formPopupAddCard.elements.name;
-const formAddCardNameInputError = formPopupAddCard.querySelector(`.${formAddCardNameInput.id}-error`);
 const formAddCardLinkInput = formPopupAddCard.elements.link;
 const addButton = formPopupAddCard.querySelector('.popup__button-submit');
+const formAddCardInputError = formPopupAddCard.querySelector('.popup__input-error');
 const profileTitleName = document.querySelector('.profile__title');
 const profileSubtitleName = document.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
@@ -24,9 +25,7 @@ const fullScreenCaption = document.querySelector('.popup__caption');
 
 const closePopupPressKey = (evt) => {
   if (evt.key === 'Escape') {
-    const popupCurrentOpen = Array.from(popupList).find( (item) => {
-      return item.classList.contains('visible-block');
-    });
+    const popupCurrentOpen = document.querySelector('.visible-block');
     closePopup(popupCurrentOpen);
   }
 }
@@ -93,9 +92,9 @@ const renderCards = (data) => {
   cardsContainer.prepend(getCardElement(data));
 };
 
-const clearInputsError = (inputFields, formName) => {
+const clearInputsError = (inputFields, formName, inputErrorClass, errorClass) => {
   inputFields.forEach((item) => {
-    hideError(formName, item);
+    hideError(formName, item, inputErrorClass, errorClass);
   })
 }
 
@@ -126,7 +125,7 @@ buttonClosePopup.forEach(item => {
 buttonEditProfile.addEventListener('click', () => {
   formEditProfileNameInput.value = profileTitleName.textContent;
   formEditProfileJobInput.value = profileSubtitleName.textContent;
-  clearInputsError(inputFieldsPopupEditProfile, formPopupEditProfile);
+  clearInputsError(inputFieldsPopupEditProfile, formPopupEditProfile, `${inputFieldsPopupEditProfile[0].classList[0]}_type_error`, `${formEditProfileInputError.classList[0]}_active`);
   setSubmitButtonState(`.${editButton.classList[0]}`, `${editButton.classList[0]}_disabled`, formPopupEditProfile, true);
   openPopup(popupEditProfile);
 });
@@ -141,5 +140,5 @@ formPopupEditProfile.addEventListener('submit', handleSubmitFormEditProfile);
 formPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 formPopupAddCard.addEventListener('reset', () => {
   setSubmitButtonState(`.${addButton.classList[0]}`, `${addButton.classList[0]}_disabled`, formPopupAddCard, false);
-  clearInputsError(inputFieldsPopupAddCard, formPopupAddCard);
+  clearInputsError(inputFieldsPopupAddCard, formPopupAddCard, `${inputFieldsPopupAddCard[0].classList[0]}_type_error`, `${formAddCardInputError.classList[0]}_active`);
 });
