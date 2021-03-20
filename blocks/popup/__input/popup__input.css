@@ -1,5 +1,6 @@
 .popup__input {
   display: block;
+  position: relative;
   width: 100%;
   margin-top: 30px;
   height: 27px;
@@ -8,4 +9,8 @@
   box-sizing: border-box;
   padding-bottom: 9px;
   padding-left: 0;
+}
+
+.popup__input::placeholder {
+  color: #C4C4C4;
 }
