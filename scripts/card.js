@@ -34,7 +34,7 @@ export default class Card {
   _handleDeleteCard() {
     this._element.remove();
   }
-  _handleLikeIcon(evt) {
+  _handleLikeIcon() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
   _showCardImageFullscreen() {

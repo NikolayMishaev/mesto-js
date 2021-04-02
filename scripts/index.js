@@ -1,9 +1,8 @@
 import
 Card
-from './card.js';
+from './Card.js';
 import {
-  FormValidator,
-  FormValidatorEditProfile
+  FormValidator
 } from './FormValidator.js';
 import {
   initialCards,
@@ -15,7 +14,6 @@ const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
-const buttonClosePopup = document.querySelectorAll('.popup__close');
 const formPopupEditProfile = document.forms['edit-profile'];
 const formEditProfileNameInput = formPopupEditProfile.elements.name;
 const formEditProfileJobInput = formPopupEditProfile.elements.job;
@@ -52,46 +50,36 @@ const handleSubmitFormEditProfile = evt => {
   closePopup(popupEditProfile);
 };
 
+const renderCards = data => {
+  const card = new Card(data, '#card-template');
+  const cardElement = card.generateCard();
+  cardsContainer.prepend(cardElement);
+};
+
 const handleSubmitFormAddCard = evt => {
   const userAddCard = {};
   userAddCard.name = formAddCardNameInput.value;
   userAddCard.link = formAddCardLinkInput.value;
-  const card = new Card(userAddCard, '#card-template');
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
+  renderCards(userAddCard);
   formPopupAddCard.reset();
   closePopup(popupAddCard);
 };
 
 initialCards.forEach(data => {
-  const card = new Card(data, '#card-template');
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
+  renderCards(data);
 });
 
 const formList = Array.from(document.querySelectorAll(setupValidation.formSelector));
 formList.forEach(formElement => {
-  const formValidator = formElement.classList.contains('popup__form_type_edit-profile')
-  ? new FormValidatorEditProfile(setupValidation, formElement)
-  : new FormValidator(setupValidation, formElement);
+  const formValidator = new FormValidator(setupValidation, formElement);
   formValidator.enableValidation();
 });
 
 popupList.forEach(item => {
-  item.children[0].addEventListener('click', (evt) => {
-    evt.stopPropagation();
-  });
-});
-
-popupList.forEach(item => {
   item.addEventListener('click', (evt) => {
-    closePopup(evt.target);
-  });
-});
-
-buttonClosePopup.forEach(item => {
-  item.addEventListener('click', (evt) => {
-    closePopup(evt.target.closest('.popup'));
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(item);
+    }
   });
 });
 

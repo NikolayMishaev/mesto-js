@@ -59,22 +59,11 @@ export class FormValidator {
     });
     this._setEventListeners();
     this._formElement.addEventListener('reset', () => {
-      this._setSubmitButtonState(false);
-      this._inputList.forEach((inputElement) => {
-        this._hideError(inputElement);
-      });
-    });
-  }
-}
-
-export class FormValidatorEditProfile extends FormValidator {
-  enableValidation() {
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    this._setEventListeners();
-    this._formElement.addEventListener('reset', () => {
-      this._setSubmitButtonState(true);
+      if (this._formElement.classList.contains('popup__form_type_edit-profile')) {
+        this._setSubmitButtonState(true);
+      } else {
+        this._setSubmitButtonState(false);
+      }
       this._inputList.forEach((inputElement) => {
         this._hideError(inputElement);
       });
