@@ -32,3 +32,9 @@ export const setupValidation = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
+
+const formPopupEditProfile = document.forms['edit-profile'];
+export const formEditProfileNameInput = formPopupEditProfile.elements.name;
+export const formEditProfileJobInput = formPopupEditProfile.elements.job;
+export const buttonEditProfile = document.querySelector('.profile__edit-button');
+export const buttonAddCard = document.querySelector('.profile__add-button');

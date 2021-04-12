@@ -1,15 +1,9 @@
-import {
-  openPopup,
-  popupFullscreen,
-  fullScreenImage,
-  popupCaption
-} from './index.js';
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -38,10 +32,7 @@ export default class Card {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
   _showCardImageFullscreen() {
-    fullScreenImage.src = this._link;
-    fullScreenImage.alt = this._name;
-    popupCaption.textContent = this._name;
-    openPopup(popupFullscreen);
+    this._handleCardClick().open({name: this._name, link: this._link});
   }
   generateCard() {
     this._element = this._getTemplate();
