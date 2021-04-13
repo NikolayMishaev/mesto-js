@@ -5,7 +5,15 @@ import {
   buttonEditProfile,
   buttonAddCard,
   formEditProfileNameInput,
-  formEditProfileJobInput
+  formEditProfileJobInput,
+  userData,
+  popupFullschreen,
+  cardTemplate,
+  cardContainer,
+  popupEditProfile,
+  popupAddCard,
+  formEditProfile,
+  formAddCard
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -14,59 +22,58 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 
-const userInfo = new UserInfo({
-  name: '.profile__title',
-  info: '.profile__subtitle'
-});
+const userInfo = new UserInfo(userData);
 
-const handleCardClick = () => {
-  return new PopupWithImage('.popup_type_fullscreen');
-}
+const popupWithImage = new PopupWithImage(popupFullschreen);
+
+const PopupWithFormEditProfile = new PopupWithForm({
+  popupSelector: popupEditProfile,
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data)
+  }
+})
+
+const PopupWithFormAddCard = new PopupWithForm({
+  popupSelector: popupAddCard,
+  handleFormSubmit: (data) => {
+    renderCards([data])
+  }
+})
 
 const renderCards = data => {
   const cardList = new Section({
       items: data,
       renderer: (item) => {
-        const card = new Card(item, '#card-template', handleCardClick);
+        const card = new Card(item, cardTemplate, {
+          handleCardClick: (data) => {
+            popupWithImage.open(data);
+            popupWithImage.setEventListeners();
+          }
+        });
         const cardElement = card.generateCard();
         cardList.addItem(cardElement);
       },
     },
-    '.cards'
+    cardContainer
   );
   cardList.renderItems();
 };
 
 renderCards(initialCards);
 
-const formList = Array.from(document.querySelectorAll(setupValidation.formSelector));
-formList.forEach(formElement => {
-  const formValidator = new FormValidator(setupValidation, formElement);
-  formValidator.enableValidation();
-});
+const formEditProfileValidator = new FormValidator(setupValidation, formEditProfile);
+const formAddCardValidator = new FormValidator(setupValidation, formAddCard);
+formEditProfileValidator.enableValidation();
+formAddCardValidator.enableValidation();
 
 buttonEditProfile.addEventListener('click', () => {
   formEditProfileNameInput.value = userInfo.getUserInfo().name;
   formEditProfileJobInput.value = userInfo.getUserInfo().info;
-  new PopupWithForm({
-    popupSelector: '.popup_type_edit-profile',
-    handleFormSubmit: (data) => {
-      userInfo.setUserInfo({
-        name: data[0],
-        info: data[1]
-      })
-    }
-  }).open();
+  PopupWithFormEditProfile.open();
+  PopupWithFormEditProfile.setEventListeners();
 });
 
 buttonAddCard.addEventListener('click', () => {
-  new PopupWithForm({
-    popupSelector: '.popup_type_add-card',
-    handleFormSubmit: (data) => {
-      renderCards([{
-        name: data[0],
-        link: data[1]
-      }])
-    }
-  }).open();
+  PopupWithFormAddCard.open();
+  PopupWithFormAddCard.setEventListeners();
 });

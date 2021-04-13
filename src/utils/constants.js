@@ -33,8 +33,20 @@ export const setupValidation = {
   errorClass: 'popup__input-error_active'
 };
 
+export const userData = {
+  name: '.profile__title',
+  info: '.profile__subtitle'
+};
+
 const formPopupEditProfile = document.forms['edit-profile'];
 export const formEditProfileNameInput = formPopupEditProfile.elements.name;
 export const formEditProfileJobInput = formPopupEditProfile.elements.job;
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
+export const popupFullschreen = '.popup_type_fullscreen';
+export const cardTemplate = '#card-template';
+export const cardContainer = '.cards';
+export const popupEditProfile = '.popup_type_edit-profile';
+export const popupAddCard = '.popup_type_add-card';
+export const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
+export const formAddCard = document.querySelector('.popup__form_type_add-card');
