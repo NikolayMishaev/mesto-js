@@ -25,20 +25,23 @@ import Section from '../components/Section.js';
 const userInfo = new UserInfo(userData);
 
 const popupWithImage = new PopupWithImage(popupFullschreen);
+popupWithImage.setEventListeners();
 
-const PopupWithFormEditProfile = new PopupWithForm({
+const popupWithFormEditProfile = new PopupWithForm({
   popupSelector: popupEditProfile,
   handleFormSubmit: (data) => {
     userInfo.setUserInfo(data)
   }
 })
+popupWithFormEditProfile.setEventListeners();
 
-const PopupWithFormAddCard = new PopupWithForm({
+const popupWithFormAddCard = new PopupWithForm({
   popupSelector: popupAddCard,
   handleFormSubmit: (data) => {
     renderCards([data])
   }
 })
+popupWithFormAddCard.setEventListeners();
 
 const renderCards = data => {
   const cardList = new Section({
@@ -47,7 +50,6 @@ const renderCards = data => {
         const card = new Card(item, cardTemplate, {
           handleCardClick: (data) => {
             popupWithImage.open(data);
-            popupWithImage.setEventListeners();
           }
         });
         const cardElement = card.generateCard();
@@ -69,11 +71,9 @@ formAddCardValidator.enableValidation();
 buttonEditProfile.addEventListener('click', () => {
   formEditProfileNameInput.value = userInfo.getUserInfo().name;
   formEditProfileJobInput.value = userInfo.getUserInfo().info;
-  PopupWithFormEditProfile.open();
-  PopupWithFormEditProfile.setEventListeners();
+  popupWithFormEditProfile.open();
 });
 
 buttonAddCard.addEventListener('click', () => {
-  PopupWithFormAddCard.open();
-  PopupWithFormAddCard.setEventListeners();
+  popupWithFormAddCard.open();
 });
