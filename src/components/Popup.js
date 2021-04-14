@@ -17,14 +17,13 @@ export default class Popup {
 
   setEventListeners() {
     this._popup.addEventListener('click', this._boundhandleClosePopup);
-    document.addEventListener('keydown', this._boundhandleEscClose);
   }
   open() {
     this._popup.classList.add("visible-block");
+    document.addEventListener('keydown', this._boundhandleEscClose);
   }
   close() {
     this._popup.classList.remove("visible-block");
     document.removeEventListener('keydown', this._boundhandleEscClose);
-    this._popup.removeEventListener('click', this._boundhandleClosePopup);
   }
 }
