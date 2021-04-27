@@ -38,7 +38,7 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_type/popup__container_type_delete-card.css);
-@import url(../blocks/popup/__container/_type/popup__container_type_update_avatar.css);
+@import url(../blocks/popup/__container/_type/popup__container_type_update-avatar.css);
 @import url(../blocks/popup/__container/_type/popup__container_type_error-message.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__fullscreen/popup__fullscreen.css);
