@@ -14,7 +14,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <div class="profile__avatar"></div>
+        <button type="button" aria-label="edit avatar image" class="profile__avatar"></button>
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button type="button" aria-label="edit profile" class="profile__edit-button"></button>
@@ -43,7 +43,7 @@
               <span class="popup__input-error name-input-edit-error"></span>
             </label>
             <label class="popup__field">
-              <input id="job-input" required name="job" minlength="2" maxlength="200" placeholder="О себе"
+              <input id="job-input" required name="about" minlength="2" maxlength="200" placeholder="О себе"
                 class="popup__input popup__input_type_edit-job" type="text">
               <span class="popup__input-error job-input-error"></span>
             </label>
@@ -80,13 +80,46 @@
           </figure>
         </div>
       </div>
+      <div class="popup popup_type_delete-card">
+        <div class="popup__container popup__container_type_delete-card">
+          <button type="button" aria-label="close popup" class="popup__close"></button>
+          <h3 class="popup__title popup__title_type_delete-card">Вы уверены?</h3>
+          <form novalidate action="#" name="delete-card" class="popup__form popup__form_type_delete-card" method="POST">
+            <button aria-label="submit form" class="popup__button-submit popup__button-submit_type_delete-card"
+              type="submit">Да</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_type_update-avatar">
+        <div class="popup__container popup__container_type_update_avatar">
+          <button type="button" aria-label="close popup" class="popup__close"></button>
+          <h3 class="popup__title">Обновить аватар</h3>
+          <form novalidate action="#" name="update-avatar" class="popup__form popup__form_type_update-avatar" method="POST">
+            <label class="popup__field">
+              <input id="link-input" type="url" required name="link" placeholder="Ссылка на картинку"
+                class="popup__input popup__input_type_card-link">
+              <span class="popup__input-error link-input-error"></span>
+            </label>
+            <button aria-label="submit form" class="popup__button-submit popup__button-submit_disabled"
+              type="submit">Сохранить</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_type_error-message">
+        <div class="popup__container popup__container_type_error-message">
+          <h3 class="popup__title popup__title_type_error-message"></h3>
+        </div>
+
+      </div>
     </div>
   </div>
   <template id="card-template">
     <li class="card">
       <div class="card__place"></div>
       <h2 class="card__title"></h2>
-      <button type="button" aria-label="like toggle" class="card__like"></button>
+      <button type="button" aria-label="like toggle" class="card__like">
+        <p class="card__likes-counter">0</p>
+      </button>
       <div class="card__delete"></div>
     </li>
   </template>

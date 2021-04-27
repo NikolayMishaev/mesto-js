@@ -8,6 +8,9 @@
   width: 20px;
   height: 22px;
   transition: opacity, .5s;
+  position: relative;
+  left: 0px;
+  top: -19px;
 }
 
 .card__like:focus {
