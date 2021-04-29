@@ -1,16 +1,29 @@
 export default class Section {
   constructor({
-    items,
+    api,
     renderer
-  }, containerSelector) {
-    this._renderedItems = items;
+  }, containerSelector, showErrorMessage) {
+    this._api = api;
     this._renderer = renderer;
 
     this._container = document.querySelector(containerSelector);
+    this._showErrorMessage = showErrorMessage;
   }
 
-  renderItems() {
-    this._renderedItems.forEach(item => this._renderer(item))
+  _getItems() {
+    this._api.getInitialCards()
+      .then(data => {
+        if (data) {
+          this.renderItems(data.reverse());
+        }
+      })
+      .catch(err => {
+        this._showErrorMessage(err);
+      })
+  }
+
+  renderItems(data) {
+    data ? data.forEach(item => this._renderer(item)) : this._getItems()
   }
 
   addItem(element) {

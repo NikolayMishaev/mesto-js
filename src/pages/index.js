@@ -19,10 +19,12 @@ import {
   formUpdateAvatar,
   sumbitbuttonEditProfile,
   sumbitbuttonAddCard,
-  sumbitbuttonUpdateAvatar,
-  popupWithErrorMessage,
-  containerErrorMessage
+  sumbitbuttonUpdateAvatar
 } from '../utils/constants.js';
+import {
+  renderLoading,
+  showErrorMessage
+} from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
@@ -42,6 +44,30 @@ const api = new Api({
 
 const userInfo = new UserInfo(userData);
 
+const cardList = new Section({
+    api: api,
+    renderer: (item) => {
+      const card = new Card(item, cardTemplate, {
+        handleCardClick: (data) => {
+          popupWithImage.open(data);
+        },
+        handleCardLike: (method, id, likeCounter) => {
+          api.likeCard(method, id)
+            .then(data => {
+              likeCounter.textContent = data.likes.length;
+            }).catch(err => {
+              showErrorMessage(err);
+            })
+        }
+      }, popupWithCardDelete, userInfo.getUserInfo()._id);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    },
+  },
+  cardContainer,
+  showErrorMessage
+);
+
 const popupWithImage = new PopupWithImage(popupFullschreen);
 popupWithImage.setEventListeners();
 
@@ -54,12 +80,10 @@ const popupWithCardDelete = new PopupWithFormDeleteCard({
     api.deleteCard(id)
       .then(() => {
         element.remove();
+        popupWithCardDelete.close();
       })
       .catch(err => {
         showErrorMessage(err);
-      })
-      .finally(() => {
-        popupWithCardDelete.close();
       })
   }
 });
@@ -68,18 +92,18 @@ popupWithCardDelete.setEventListeners();
 const popupWithFormEditProfile = new PopupWithForm({
   popupSelector: popupEditProfile,
   handleFormSubmit: (data) => {
-    sumbitbuttonEditProfile.textContent = 'Сохранение...';
+    renderLoading(sumbitbuttonEditProfile, 'Сохранение...');
 
     api.updateDataUser(data)
       .then(data => {
         userInfo.setUserInfo(data);
+        popupWithFormEditProfile.close();
       })
       .catch(err => {
         showErrorMessage(err);
       })
       .finally(() => {
-        sumbitbuttonEditProfile.textContent = 'Сохранение';
-        popupWithFormEditProfile.close();
+        renderLoading(sumbitbuttonEditProfile, 'Сохранение');
       })
   }
 })
@@ -88,17 +112,31 @@ popupWithFormEditProfile.setEventListeners();
 const popupWithFormAddCard = new PopupWithForm({
   popupSelector: popupAddCard,
   handleFormSubmit: (data) => {
-    sumbitbuttonAddCard.textContent = 'Сохранение...';
+    renderLoading(sumbitbuttonAddCard, 'Сохранение...');
     api.addNewCard(data)
       .then(data => {
-        renderCards([data]);
+        const card = new Card(data, cardTemplate, {
+          handleCardClick: (data) => {
+            popupWithImage.open(data);
+          },
+          handleCardLike: (method, id, likeCounter) => {
+            api.likeCard(method, id)
+              .then(data => {
+                likeCounter.textContent = data.likes.length;
+              }).catch(err => {
+                showErrorMessage(err);
+              })
+          }
+        }, popupWithCardDelete, userInfo.getUserInfo()._id);
+        const cardElement = card.generateCard();
+        cardList.addItem(cardElement);
+        popupWithFormAddCard.close();
       })
       .catch(err => {
         showErrorMessage(err);
       })
       .finally(() => {
-        sumbitbuttonAddCard.textContent = 'Сохранение';
-        popupWithFormAddCard.close();
+        renderLoading(sumbitbuttonAddCard, 'Сохранение');
       })
 
   }
@@ -108,7 +146,7 @@ popupWithFormAddCard.setEventListeners();
 const popupWithFormUpdateAvatar = new PopupWithForm({
   popupSelector: popupEditAvatar,
   handleFormSubmit: (link) => {
-    sumbitbuttonUpdateAvatar.textContent = 'Сохранение...';
+    renderLoading(sumbitbuttonUpdateAvatar, 'Сохранение...');
     api.updateUserAvatar({
         avatar: link.link
       })
@@ -116,13 +154,13 @@ const popupWithFormUpdateAvatar = new PopupWithForm({
         userInfo.setUserAvatar({
           link: data.avatar
         });
+        popupWithFormUpdateAvatar.close();
       })
       .catch(err => {
         showErrorMessage(err);
       })
       .finally(() => {
-        sumbitbuttonUpdateAvatar.textContent = 'Сохранение';
-        popupWithFormUpdateAvatar.close();
+        renderLoading(sumbitbuttonUpdateAvatar, 'Сохранение');
       })
   }
 })
@@ -134,64 +172,6 @@ const formUpdateAvatarValidator = new FormValidator(setupValidation, formUpdateA
 formEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
 formUpdateAvatarValidator.enableValidation();
-
-api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfo({
-      name: data.name,
-      about: data.about,
-      _id: data._id
-    });
-    userInfo.setUserAvatar({
-      link: data.avatar
-    })
-  })
-  .then(() => {
-    api.getInitialCards()
-      .then(data => {
-        renderCards(data);
-      })
-      .catch(err => {
-        showErrorMessage(err);
-      })
-  })
-  .catch(err => {
-    showErrorMessage(err);
-  })
-
-const showErrorMessage = (err) => {
-  popupWithErrorMessage.classList.add("visible-block");
-  containerErrorMessage.textContent = err;
-  setTimeout(() => {
-    popupWithErrorMessage.classList.remove("visible-block");
-  }, 3000);
-}
-
-const renderCards = data => {
-  const cardList = new Section({
-      items: data,
-      renderer: (item) => {
-        const card = new Card(item, cardTemplate, {
-          handleCardClick: (data) => {
-            popupWithImage.open(data);
-          },
-          handleCardLike: (method, id, likeCounter) => {
-            api.likeCard(method, id)
-              .then(data => {
-                likeCounter.textContent = data.likes.length;
-              })  .catch(err => {
-                showErrorMessage(err);
-              })
-          }
-        }, popupWithCardDelete, userInfo.getUserInfo()._id);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement);
-      },
-    },
-    cardContainer
-  );
-  cardList.renderItems();
-};
 
 buttonEditProfile.addEventListener('click', () => {
   formEditProfileNameInput.value = userInfo.getUserInfo().name;
@@ -206,3 +186,24 @@ buttonAddCard.addEventListener('click', () => {
 buttonEditAvatar.addEventListener('click', () => {
   popupWithFormUpdateAvatar.open();
 });
+
+api.getUserInfo()
+  .then(data => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+      _id: data._id
+    });
+    userInfo.setUserAvatar({
+      link: data.avatar
+    })
+  })
+  .then(() => {
+    cardList.renderItems();
+  })
+  .catch(err => {
+    showErrorMessage(err);
+  })
+  .catch(err => {
+    showErrorMessage(err);
+  })
