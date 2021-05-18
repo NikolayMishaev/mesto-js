@@ -54,13 +54,11 @@ export default class FormValidator {
     });
   }
   enableValidation() {
-    console.log(`произошло включение валидации, для ${this._formElement.getAttribute('name')} очистка полей при этом не сработала`);
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
     this._setEventListeners();
     this._formElement.addEventListener('reset', () => {
-      console.log('произошло событие reset, сработала очистка полей');
       if (this._formElement.classList.contains('popup__form_type_edit-profile')) {
         this._setSubmitButtonState(true);
       } else {
@@ -68,7 +66,6 @@ export default class FormValidator {
       }
 
       this._inputList.forEach((inputElement) => {
-        console.log('Данный функционал не работает при включении валидации. Он навешен на событие "reset" формы и отрабатывает только при наступлении события "reset" формы. Если его удалить, то при reset ошибки останутся видимыми');
         this._hideError(inputElement);
       });
     });
