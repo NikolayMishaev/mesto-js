@@ -1,6 +1,6 @@
 # Сервис Mesto
 ***
-https://nikolaymishaev.github.io/mesto/index.html
+[ссылка на gh-pages](https://nikolaymishaev.github.io/mesto/index.html)
 ## Описание
 сервис Mesto - это интерактивная страница, на которой можно:
 - добавлять и удалять фотографии
