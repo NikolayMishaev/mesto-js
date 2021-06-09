@@ -166,7 +166,7 @@ const popupWithFormUpdateAvatar = new PopupWithForm({
 })
 popupWithFormUpdateAvatar.setEventListeners();
 
-const formEditProfileValidator = new FormValidator(setupValidation, formEditProfile);
+const formEditProfileValidator = new FormValidator(setupValidation, formEditProfile, true);
 const formAddCardValidator = new FormValidator(setupValidation, formAddCard);
 const formUpdateAvatarValidator = new FormValidator(setupValidation, formUpdateAvatar);
 formEditProfileValidator.enableValidation();

@@ -1,5 +1,5 @@
 export default class FormValidator {
-  constructor(setupValidation, formElement) {
+  constructor(setupValidation, formElement, resetFormSubmitState = false) {
     this._formSelector = setupValidation.formSelector;
     this._inputSelector = setupValidation.inputSelector;
     this._submitButtonSelector = setupValidation.submitButtonSelector;
@@ -7,6 +7,7 @@ export default class FormValidator {
     this._inputErrorClass = setupValidation.inputErrorClass;
     this._errorClass = setupValidation.errorClass;
     this._formElement = formElement;
+    this._resetFormSubmitState = resetFormSubmitState;
   }
   _hideError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
@@ -59,12 +60,7 @@ export default class FormValidator {
     });
     this._setEventListeners();
     this._formElement.addEventListener('reset', () => {
-      if (this._formElement.classList.contains('popup__form_type_edit-profile')) {
-        this._setSubmitButtonState(true);
-      } else {
-        this._setSubmitButtonState(false);
-      }
-
+        this._setSubmitButtonState(this._resetFormSubmitState);
       this._inputList.forEach((inputElement) => {
         this._hideError(inputElement);
       });
