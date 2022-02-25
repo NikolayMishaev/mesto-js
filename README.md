@@ -1,6 +1,7 @@
 # Приложение «Mesto»
 ***
-[gh-pages](https://nikolaymishaev.github.io/mesto-js/index.html)
+- [gh-pages](https://nikolaymishaev.github.io/mesto-js/index.html)
+- [макет](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12?node-id=0%3A1)
 
 ## Описание
 сервис Mesto - это интерактивная страница, на которой можно:
