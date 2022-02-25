@@ -1,6 +1,6 @@
 # Приложение «Mesto»
 ***
-[ссылка на gh-pages](https://nikolaymishaev.github.io/mesto/index.html)
+[gh-pages](https://nikolaymishaev.github.io/mesto-js/index.html)
 
 ## Описание
 сервис Mesto - это интерактивная страница, на которой можно:
@@ -9,8 +9,8 @@
 - редактировать данные профиля
 
 ## Скриншоты
-![редактирование профиля](https://github.com/NikolayMishaev/mesto-js/raw/main/src/readme/01.jpg)
-![общий вид приложения](https://github.com/NikolayMishaev/mesto-js/raw/main/src/readme/02.jpg)
+![редактирование профиля](https://github.com/NikolayMishaev/mesto-js/raw/main/src/images/readme/01.jpg)
+![общий вид приложения](https://github.com/NikolayMishaev/mesto-js/raw/main/src/images/readme/02.jpg)
 
 ## Технологии
 - HTML
